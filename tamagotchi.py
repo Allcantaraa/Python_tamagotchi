@@ -67,7 +67,7 @@ class Tamagotchi :
                 pass
     
     def salvar_estado(self) :
-        with open (caminho_arquivo, '+w', encoding='utf-8') as arquivo :
+        with open (caminho_arquivo, 'w', encoding='utf-8') as arquivo :
             arquivo.write(f'{self.nome},{self.saude},{self.fome} \n')
 
 
@@ -109,7 +109,7 @@ while True:
         break
     else :
         print("Escolha inválida")
-        break
+        continue
 
 if tamagotchi.morreu == False :
     print(f"VOLTE MAIS TARDE PARA CUIDAR DO {tamagotchi.nome}")
