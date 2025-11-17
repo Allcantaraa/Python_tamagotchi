@@ -111,4 +111,7 @@ while True:
         print("Escolha inválida")
         break
 
-print(f"VOLTE MAIS TARDE PARA CUIDAR DO {tamagotchi.nome}")
+if tamagotchi.morreu == False :
+    print(f"VOLTE MAIS TARDE PARA CUIDAR DO {tamagotchi.nome}")
+else :
+    print(f"VOLTE MAIS TARDE PARA CUIDAR DO TUMULO DO {tamagotchi.nome}. SEU MONSTRO")
