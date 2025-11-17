@@ -1,5 +1,6 @@
 import random
 import os
+import stat
 
 caminho_arquivo = 'tamagotchi.txt'
 
@@ -62,15 +63,13 @@ class Tamagotchi :
             if self.saude <= vida_minima or self.fome <= fome_minima :
                 print(f"💀 OLHA O QUE VOCÊ FEZ!!! \n O {self.nome} MORREU")
                 os.remove(caminho_arquivo)
-                print(f"{tamagotchi.nome} morreu. Os céus lamentam sua morte. Eles te culpam, te chamam de monstro. O save foi deletado")
+                print(f"{self.nome} morreu. Os céus lamentam sua morte. Eles te culpam, te chamam de monstro. O save foi deletado")
                 self.morreu = True
                 pass
     
     def salvar_estado(self) :
         with open (caminho_arquivo, 'w', encoding='utf-8') as arquivo :
-            arquivo.write(f'{self.nome},{self.saude},{self.fome} \n')
-
-
+            arquivo.write(f'{self.nome},{self.saude},{self.fome}\n')
 
 if os.path.exists(caminho_arquivo) :
     print("Save encontrado! Carregando seu bichinho...")
@@ -86,29 +85,33 @@ else :
     tamagotchi.salvar_estado()
         
 while True:
-    
+
     if tamagotchi.morreu == True:
         break
-
-    print(f"------------------- STATUS ATUAL -------------------------")
-    print(f"NOME: {tamagotchi.nome}\nSAÚDE: {tamagotchi.saude}\nFOME: {tamagotchi.fome}")
-    
-    escolha = int(input("O QUE QUER FAZER?\n 1 - ALIMENTAR\n 2 - BRINCAR\n 3- LUTAR\n 4 - SALVAR ESTADO\n"))
-    
-    if escolha == 1 :
-        tamagotchi.alimentar()
-        continue
-    elif escolha == 2 :
-        tamagotchi.brincar()
-        continue
-    elif escolha == 3 :
-        tamagotchi.lutar()
-        continue
-    elif escolha == 4 :
-        tamagotchi.salvar_estado()
-        break
-    else :
-        print("Escolha inválida")
+     
+    try :
+        print(f"------------------- STATUS ATUAL -------------------------")
+        print(f"NOME: {tamagotchi.nome}\nSAÚDE: {tamagotchi.saude}\nFOME: {tamagotchi.fome}")
+        
+        escolha = int(input("O QUE QUER FAZER?\n 1 - ALIMENTAR\n 2 - BRINCAR\n 3- LUTAR\n 4 - SALVAR ESTADO\n"))
+        
+        if escolha == 1 :
+            tamagotchi.alimentar()
+            continue
+        elif escolha == 2 :
+            tamagotchi.brincar()
+            continue
+        elif escolha == 3 :
+            tamagotchi.lutar()
+            continue
+        elif escolha == 4 :
+            tamagotchi.salvar_estado()
+            break
+        else :
+            print("Escolha inválida")
+            continue
+    except ValueError:
+        print("Isso não é um número")
         continue
 
 if tamagotchi.morreu == False :
